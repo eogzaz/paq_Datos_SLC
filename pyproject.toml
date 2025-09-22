@@ -3,11 +3,11 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "datautils"
+name = "paq_Datos_SLC"
 version = "0.1.0"
-description = "Paquete para obtener y limpiar observaciones del MPC y caracterizar cuerpos menores del sistema solar."
+description = "Paquete para obtener y limpiar observaciones del MPC y conseguir los datos necesarios para la curva de luz secular de cuerpos menores."
 authors = [
-    { name="Emiliano gómez", email="emigomeza04@gmail.com" }
+    { name="Emiliano Gómez", email="emigomeza04@gmail.com" }
 ]
 readme = "README.md"
 license = { text = "MIT" }
@@ -21,8 +21,8 @@ dependencies = [
 ]
 
 [tool.setuptools]
-packages = ["datautils"]
+packages = ["paq_Datos_SLC"]   # 👈 debe coincidir con el nombre de tu carpeta de código
 include-package-data = true
 
 [tool.setuptools.package-data]
-datautils = ["family.json"]
+paq_Datos_SLC = ["family.json"]
