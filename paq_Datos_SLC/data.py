@@ -5,7 +5,7 @@ import numpy as np
 import xml.etree.ElementTree as ET
 import html, re
 from datetime import datetime, timedelta
-from info import *
+from .info import *
 
 # Clase que consulta y procesa los datos necesarios para la SLC
 class DATA:
