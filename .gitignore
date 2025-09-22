@@ -1,0 +1,20 @@
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+
+# Entornos virtuales
+.env
+.venv
+env/
+venv/
+
+# Configuración local
+.DS_Store
+.ipynb_checkpoints/
+*.log
+
+# Archivos de compilación
+dist/
+build/
