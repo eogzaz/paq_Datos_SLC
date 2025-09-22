@@ -412,7 +412,7 @@ class DATA:
         # 2. Hacer el join usando la nueva columna "Date"
         df_join = df_obs.join(df_eph, on="Date", how="inner")
 
-        if object_type=='Interestelar':
+        if object_type=='Objeto Interestelar':
             df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion_exocomets(df_join,selected_object))) 
         else:
             df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion(df_join,selected_object))) 
@@ -434,7 +434,7 @@ class DATA:
         # 2. Hacer el join usando la nueva columna "Date"
         df_join = df_obs.join(df_eph, on="Date", how="inner")
 
-        if object_type=='Interestelar':
+        if object_type=='Objeto Interestelar':
             df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion_exocomets(df_join,selected_object))) 
         else:
             df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion(df_join,selected_object))) 
