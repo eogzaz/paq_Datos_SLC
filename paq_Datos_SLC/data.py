@@ -360,6 +360,11 @@ class DATA:
         P = float(Information(selected_object).orbital_period())*365.25
         df = df.with_columns([((((pl.col("obsTime") - T_peri).dt.total_seconds())/86400 + P/2) % P - P/2).alias("t-Tq")])
         return df
+    
+    def days_to_perihelion_exocomets(self, df, selected_object):
+        T_peri = Information(selected_object).date_perihelion()
+        df = df.with_columns([(((pl.col("obsTime") - T_peri).dt.total_seconds())/86400).alias("t-Tq")])
+        return df
 
     def reduced_magnitude(self, df):
         df = df.with_columns((pl.col("Magn_obs").cast(pl.Float64) - 5 * np.log10(pl.col("r") * pl.col("Delta"))).alias("Magn_redu"))
@@ -407,7 +412,10 @@ class DATA:
         # 2. Hacer el join usando la nueva columna "Date"
         df_join = df_obs.join(df_eph, on="Date", how="inner")
 
-        df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion(df_join,selected_object))) 
+        if object_type=='Interestelar':
+            df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion_exocomets(df_join,selected_object))) 
+        else:
+            df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion(df_join,selected_object))) 
         return df   
     
     def datos_SLC_COBS(self, selected_object,start_date, end_date, object_type):
@@ -426,5 +434,8 @@ class DATA:
         # 2. Hacer el join usando la nueva columna "Date"
         df_join = df_obs.join(df_eph, on="Date", how="inner")
 
-        df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion(df_join,selected_object))) 
+        if object_type=='Interestelar':
+            df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion_exocomets(df_join,selected_object))) 
+        else:
+            df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion(df_join,selected_object))) 
         return df 
