@@ -336,7 +336,7 @@ class DATA:
     
             
         if not all_obs:
-            return pd.DataFrame(columns=["obsTime", "Magn_obs"])
+            return pl.DataFrame({"obsTime": [], "Magn_obs": []})
         
         df_pandas = pd.DataFrame(all_obs)
             
