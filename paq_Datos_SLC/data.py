@@ -401,6 +401,9 @@ class DATA:
         df_eph = self.get_ephemerides(selected_object,start_date, end_date, object_type)
 
         # 1. Convertir las columnas datetime a solo fecha
+        if not df_obs.shape[0]:
+            return pl.DataFrame({"Anio": [], "Mes": [], "Dia": [], "t-Tq": [], "Delta": [], "r": [], "Fase": [], "Magn_obs": [], "Magn_redu": []})
+        
         df_obs = df_obs.with_columns(
             pl.col("obsTime").dt.date().alias("Date")
         )
