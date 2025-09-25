@@ -430,7 +430,7 @@ class DATA:
             return pl.DataFrame({"Anio": [], "Mes": [], "Dia": [], "t-Tq": [], "Delta": [], "r": [], "Fase": [], "Magn_obs": [], "Magn_redu": []})
         else:
             df_eph = self.get_ephemerides(selected_object,start_date, end_date, object_type)
-            
+            df_obs = df_obs.filter(pl.col("obsTime").is_not_null())
             df_obs = df_obs.with_columns(
                 pl.col("obsTime").dt.date().alias("Date")
             )
