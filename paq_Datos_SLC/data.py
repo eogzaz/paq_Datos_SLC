@@ -423,25 +423,27 @@ class DATA:
     
     def datos_SLC_COBS(self, selected_object,start_date, end_date, object_type):
         df_obs = self.observations_COBS(selected_object, start_date, end_date)
-        df_eph = self.get_ephemerides(selected_object,start_date, end_date, object_type)
+  
 
         # 1. Convertir las columnas datetime a solo fecha
         if not df_obs.shape[0]:
             return pl.DataFrame({"Anio": [], "Mes": [], "Dia": [], "t-Tq": [], "Delta": [], "r": [], "Fase": [], "Magn_obs": [], "Magn_redu": []})
-   
-        df_obs = df_obs.with_columns(
-            pl.col("obsTime").dt.date().alias("Date")
-        )
-        
-        df_eph = df_eph.with_columns(
-            pl.col("Date").dt.date().alias("Date")
-        )
-        
-        # 2. Hacer el join usando la nueva columna "Date"
-        df_join = df_obs.join(df_eph, on="Date", how="inner")
-
-        if object_type=='Objeto Interestelar':
-            df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion_exocomets(df_join,selected_object))) 
         else:
-            df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion(df_join,selected_object))) 
-        return df 
+            df_eph = self.get_ephemerides(selected_object,start_date, end_date, object_type)
+            
+            df_obs = df_obs.with_columns(
+                pl.col("obsTime").dt.date().alias("Date")
+            )
+            
+            df_eph = df_eph.with_columns(
+                pl.col("Date").dt.date().alias("Date")
+            )
+            
+            # 2. Hacer el join usando la nueva columna "Date"
+            df_join = df_obs.join(df_eph, on="Date", how="inner")
+
+            if object_type=='Objeto Interestelar':
+                df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion_exocomets(df_join,selected_object))) 
+            else:
+                df = self.organization_df(self.reduced_magnitude(self.days_to_perihelion(df_join,selected_object))) 
+            return df 
