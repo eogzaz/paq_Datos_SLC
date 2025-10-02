@@ -60,9 +60,13 @@ class Information:
     #----------------Nombre del objeto----------------
     def name_object(self):
         if self.identifier.get("found") == 1:
-            return self.identifier.get('name')
+            name = self.identifier.get('name')
+            if name is None:
+                return ' '
+            else:
+                return name
         elif self.identifier.get("found") == 0:
-            return None
+            return ' '
     #----------------Provisional designacion---------------------
     def provisional_designation(self):
         if self.identifier.get("found") == 1:
