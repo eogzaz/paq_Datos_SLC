@@ -82,7 +82,7 @@ class Information:
                 return 'Cometa'
             elif object_type == 'Interstellar':
                 return 'Objeto Interestelar'
-            elif object_type=='Minor Planet' or object_type=='Minor Planet (Binary)':
+            elif object_type=='Minor Planet' or object_type=='Minor Planet (Binary)' or object_type=='Dual Status (Minor Planet and Comet)':
                 return 'Asteroide'
             elif object_type=='Natural Satellite (of planet)':
                 return 'Satelite Natural'
